@@ -15,6 +15,7 @@ def syncopy(from_path,to_path):
             for file in files:
                 src_file=os.path.join(root,file)
                 shutil.copy(src_file,to_path)
+                os.utime( os.path.join(to_path,file), (os.path.getatime(src_file), os.path.getmtime(src_file)))  
             for dir in dirs:
                 syncopy(os.path.join(root,dir),os.path.join(to_path,dir))
             break
